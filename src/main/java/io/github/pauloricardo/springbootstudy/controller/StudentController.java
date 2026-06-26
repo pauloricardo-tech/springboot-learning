@@ -1,5 +1,7 @@
-package io.github.pauloricardo.springbootstudy;
+package io.github.pauloricardo.springbootstudy.controller;
 
+import io.github.pauloricardo.springbootstudy.service.StudentService;
+import io.github.pauloricardo.springbootstudy.model.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,12 @@ import java.util.List;
 
 @RestController
 public class StudentController {
+
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/student")
     public Student getStudent() {
@@ -29,7 +37,7 @@ public class StudentController {
     @GetMapping("/students/{id}")
     public Student getStudent(@PathVariable int id) {
 
-        return new Student(id, "Aluno " + id, 20 + id);
+        return studentService.getStudentById(id);
     }
 
     @PostMapping("/students")

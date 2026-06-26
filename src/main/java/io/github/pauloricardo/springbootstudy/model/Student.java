@@ -1,4 +1,4 @@
-package io.github.pauloricardo.springbootstudy;
+package io.github.pauloricardo.springbootstudy.model;
 
 public class Student {
 
