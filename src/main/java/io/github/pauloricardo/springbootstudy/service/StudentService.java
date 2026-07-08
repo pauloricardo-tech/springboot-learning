@@ -1,12 +1,21 @@
 package io.github.pauloricardo.springbootstudy.service;
 
 import io.github.pauloricardo.springbootstudy.model.Student;
+import io.github.pauloricardo.springbootstudy.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StudentService {
+
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+
+        this.studentRepository = studentRepository;
+
+    }
 
     public Student getStudentById(int id){
 
