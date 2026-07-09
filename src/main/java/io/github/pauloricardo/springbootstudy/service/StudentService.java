@@ -19,7 +19,7 @@ public class StudentService {
 
     public Student getStudentById(int id){
 
-        return new Student( id, "Aluno " + id, 20 + id);
+        return studentRepository.findById(id).orElse(null);
 
     }
 
@@ -31,15 +31,13 @@ public class StudentService {
 
     public List<Student> getStudents() {
 
-        return List.of(new Student( 1, "Paulo", 25),
-                       new Student(2, "João", 26),
-                       new Student(3, "Maria", 27));
+        return studentRepository.findAll();
 
     }
 
     public Student createStudent(Student student) {
 
-        return student;
+        return studentRepository.save(student);
     }
 
 }
