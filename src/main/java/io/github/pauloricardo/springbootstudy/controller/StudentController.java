@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 
@@ -43,6 +45,20 @@ public class StudentController {
     public Student createStudent(@RequestBody Student student) {
 
         return studentService.createStudent(student);
+
+    }
+
+    @PutMapping("/students/{id}")
+    public Student updateStudent(@PathVariable int id, @RequestBody Student student) {
+
+        return studentService.updateStudent(id, student);
+
+    }
+
+    @DeleteMapping("/students/{id}")
+    public void deleteStudent(@PathVariable int id) {
+
+        studentService.deleteStudent(id);
 
     }
 
