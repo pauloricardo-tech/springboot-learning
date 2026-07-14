@@ -1,5 +1,7 @@
 package io.github.pauloricardo.springbootstudy.service;
 
+import io.github.pauloricardo.springbootstudy.dto.StudentRequestDTO;
+import io.github.pauloricardo.springbootstudy.dto.StudentResponseDTO;
 import io.github.pauloricardo.springbootstudy.model.Student;
 import io.github.pauloricardo.springbootstudy.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -35,9 +37,16 @@ public class StudentService {
 
     }
 
-    public Student createStudent(Student student) {
+    public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO) {
 
-        return studentRepository.save(student);
+        Student student = new Student();
+
+        student.setName(studentRequestDTO.getName());
+        student.setAge(studentRequestDTO.getAge());
+
+        Student savedStudent = studentRepository.save(student);
+
+        return new StudentResponseDTO(savedStudent.getId(), savedStudent.getName(), savedStudent.getAge());
     }
 
     public Student updateStudent(int id, Student student) {

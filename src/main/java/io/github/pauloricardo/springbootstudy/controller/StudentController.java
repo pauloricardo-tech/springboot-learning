@@ -1,5 +1,7 @@
 package io.github.pauloricardo.springbootstudy.controller;
 
+import io.github.pauloricardo.springbootstudy.dto.StudentRequestDTO;
+import io.github.pauloricardo.springbootstudy.dto.StudentResponseDTO;
 import io.github.pauloricardo.springbootstudy.service.StudentService;
 import io.github.pauloricardo.springbootstudy.model.Student;
 
@@ -45,9 +47,9 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public Student createStudent(@Valid @RequestBody Student student) {
+    public StudentResponseDTO createStudent(@Valid @RequestBody StudentRequestDTO studentRequestDTO) {
 
-        return studentService.createStudent(student);
+        return studentService.createStudent(studentRequestDTO);
 
     }
 
