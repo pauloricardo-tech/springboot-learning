@@ -1,11 +1,14 @@
 package io.github.pauloricardo.springbootstudy.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Student {
@@ -19,6 +22,13 @@ public class Student {
 
     @Min(value = 1, message = "Age must be greater than zero")
     private int age;
+
+    @OneToMany(mappedBy = "student")
+    private List<Course> courses;
+
+    public List<Course> getCourses() {
+        return courses;
+    }
 
     public Student() {
 
