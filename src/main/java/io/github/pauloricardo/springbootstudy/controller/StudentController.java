@@ -34,14 +34,14 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public List<Student> getStudents() {
+    public List<StudentResponseDTO> getStudents() {
 
         return studentService.getStudents();
 
     }
 
     @GetMapping("/students/{id}")
-    public Student getStudent(@PathVariable int id) {
+    public StudentResponseDTO getStudent(@PathVariable int id) {
 
         return studentService.getStudentById(id);
     }
@@ -54,9 +54,9 @@ public class StudentController {
     }
 
     @PutMapping("/students/{id}")
-    public Student updateStudent(@PathVariable int id, @Valid @RequestBody Student student) {
+    public StudentResponseDTO updateStudent(@PathVariable int id, @Valid @RequestBody StudentRequestDTO studentRequestDTO) {
 
-        return studentService.updateStudent(id, student);
+        return studentService.updateStudent(id, studentRequestDTO);
 
     }
 

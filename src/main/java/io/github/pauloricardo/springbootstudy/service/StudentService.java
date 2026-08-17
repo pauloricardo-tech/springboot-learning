@@ -19,9 +19,19 @@ public class StudentService {
 
     }
 
-    public Student getStudentById(int id){
+    public StudentResponseDTO getStudentById(int id){
 
-        return studentRepository.findById(id).orElse(null);
+        Student student = studentRepository.findById(id).orElse(null);
+
+        if (student == null){
+            return null;
+        }
+
+        return new StudentResponseDTO(
+
+                student.getId(),
+                student.getName(),
+                student.getAge());
 
     }
 
@@ -31,9 +41,9 @@ public class StudentService {
 
     }
 
-    public List<Student> getStudents() {
+    public List<StudentResponseDTO> getStudents() {
 
-        return studentRepository.findAll();
+        return studentRepository.findAll().stream().map(student -> new StudentResponseDTO(student.getId(), student.getName(), student.getAge())).toList();
 
     }
 
@@ -49,7 +59,7 @@ public class StudentService {
         return new StudentResponseDTO(savedStudent.getId(), savedStudent.getName(), savedStudent.getAge());
     }
 
-    public Student updateStudent(int id, Student student) {
+    public StudentResponseDTO updateStudent(int id, StudentRequestDTO studentRequestDTO) {
 
         Student existingStudent = studentRepository.findById(id).orElse(null);
 
@@ -57,10 +67,12 @@ public class StudentService {
             return null;
         }
 
-        existingStudent.setName(student.getName());
-        existingStudent.setAge(student.getAge());
+        existingStudent.setName(studentRequestDTO.getName());
+        existingStudent.setAge(studentRequestDTO.getAge());
 
-        return studentRepository.save(existingStudent);
+        Student updatedStudent = studentRepository.save(existingStudent);
+
+        return new StudentResponseDTO(updatedStudent.getId(), updatedStudent.getName(), updatedStudent.getAge());
 
     }
 
